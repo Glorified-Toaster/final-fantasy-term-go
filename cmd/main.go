@@ -45,7 +45,7 @@ func main() {
 	}
 
 	programDir = filepath.Dir(program)
-	spriteDir = filepath.Join(programDir, "SpritesDir")
+	spriteDir = filepath.Join(programDir, "spritesDir")
 
 	flag.Parse()
 
@@ -67,11 +67,11 @@ func main() {
 	}
 }
 
-func DrawASCII(artPath string) {
-	if artPath == "" {
+func DrawASCII(path string) {
+	if path == "" {
 		log.Fatal("Invalid Path")
 	}
-	sprite, err := os.ReadFile(artPath)
+	sprite, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatal("cannot open file")
 		return
@@ -84,6 +84,7 @@ func DrawByName(name string, sprites []Sprite) {
 		if name == sprite.Name {
 			path := filepath.Join(spriteDir, name)
 			DrawASCII(path)
+			fmt.Printf("%s - %s\n", sprite.Name, sprite.FF)
 			return
 		}
 	}
@@ -100,6 +101,7 @@ func DrawByRandom(sprites []Sprite) {
 	sprite := sprites[index]
 	path := filepath.Join(spriteDir, sprite.Name)
 	DrawASCII(path)
+	fmt.Printf("%s - %s\n", sprites[index].Name, sprites[index].FF)
 }
 
 func ListAllSprites(sprites []Sprite) {
