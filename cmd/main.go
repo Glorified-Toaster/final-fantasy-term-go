@@ -10,14 +10,6 @@ import (
 	"path/filepath"
 )
 
-// TODO:
-//
-// DONE: make json file for names and ff part.
-// Draw the character by name
-// Draw by random
-// DONE: list all of the characters
-//
-
 type Sprite struct {
 	Name string `json:"name"`
 	FF   string `json:"ff"`
@@ -25,10 +17,10 @@ type Sprite struct {
 
 var (
 	sprite     []Sprite
-	spriteList string = "sprite.json"
 	program    string
 	programDir string
 	spriteDir  string
+	spriteList string = filepath.Join(programDir, "sprite.json")
 
 	// Flags
 	listAll      *bool   = flag.Bool("a", false, "List all the sprites")
@@ -59,7 +51,7 @@ func main() {
 
 	switch {
 	case *debugPath:
-		PrintDebugPath(program, programDir, spriteDir)
+		PrintDebugPath(program, programDir, spriteDir, spriteList)
 
 	case *listAll:
 		ListAllSprites(sprite)
@@ -116,8 +108,9 @@ func ListAllSprites(sprites []Sprite) {
 	}
 }
 
-func PrintDebugPath(program, programDir, spriteDir string) {
+func PrintDebugPath(program, programDir, spriteDir, spriteList string) {
 	fmt.Println("PROGRAM:", program)
 	fmt.Println("PROGRAM_DIR:", programDir)
 	fmt.Println("SPRITE_DIR:", spriteDir)
+	fmt.Println("SPRITE_LIST:", spriteList)
 }
